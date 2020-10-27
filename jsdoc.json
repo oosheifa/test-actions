@@ -1,0 +1,23 @@
+{
+  "opts": {
+    "destination": "docs/jsdoc/",
+    "readme": "README.md",
+    "recurse": true
+  },
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+  "include": "dist/",
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    }
+  }
+}

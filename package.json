@@ -1,0 +1,96 @@
+{
+  "name": "@iwan.aucamp/typescript.template",
+  "version": "1.0.0-beta.0",
+  "description": "typescript template",
+  "license": "CC0-1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:aucampia/templates/typescript.git"
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "keywords": [
+    "template"
+  ],
+  "bin": {
+    "iwana-template-ts-cli": "dist/cli.js"
+  },
+  "scripts": {
+    "#:lint": "tslint --project .",
+    "#:lint:fix": "tslint --project . --fix",
+    "eslint": "eslint",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "build": "npm run lint && rimraf dist && npm run build:fast",
+    "build:fast": "tsc && copyfiles 'src/**/*.js' --up 1 dist",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "clean": "rimraf --glob dist/ dist-*/ docs/ *.tgz",
+    "distclean": "npm run clean && rimraf --glob node_modules",
+    "preversion:FIXME": "npm run lint && git pull",
+    "postversion": "ts-node ./src/xscripts.ts -- run postversion",
+    "installg": "npm run clean && npm pack && npm install -g *.tgz",
+    "start": "npm run build:fast && npm run start:fast --",
+    "start:fast": "node dist/cli.js",
+    "start:ts-node": "ts-node src/cli.ts",
+    "docs": "npm run docs:typedoc ./src/",
+    "docs:typedoc": "typedoc",
+    "docs:jsdoc": "npm run build:fast && jsdoc -c jsdoc.json",
+    "ts-node": "ts-node",
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w",
+    "test": "jest --env=node --colors --coverage",
+    "validate": "run-p lint test",
+    "fix:url": "ts-node ./src/xscripts.ts -- run fix:url",
+    "xscripts": "ts-node ./src/xscripts.ts",
+    "snapshot:check": "ts-node ./src/xscripts.ts -- run snapshot:check",
+    "snapshot": "ts-node ./src/xscripts.ts -- run snapshot",
+    "snapshot:publish": "ts-node ./src/xscripts.ts -- run snapshot:publish",
+    "mark": "ts-node ./src/xscripts.ts -- run mark",
+    "git:hooks:install": "ts-node ./src/xscripts.ts -- run git:hooks:install",
+    "git:hook:precommit": "ts-node ./src/xscripts.ts -- run git:hook:precommit",
+    "env": "env"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.8",
+    "@types/json-file-plus": "^3.3.2",
+    "@types/node": "^12.12.53",
+    "@types/semver": "^7.3.1",
+    "@types/yargs": "^15.0.5",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
+    "concurrently": "^5.2.0",
+    "copyfiles": "^2.3.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "globby": "^11.0.1",
+    "jest": "^26.2.2",
+    "jsdoc": "^3.6.5",
+    "json-file-plus": "^3.3.1",
+    "moment": "^2.27.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "semver": "^7.3.2",
+    "shelljs": "^0.8.4",
+    "shx": "^0.3.2",
+    "ts-jest": "^26.1.4",
+    "ts-node": "^8.10.2",
+    "typedoc": "^0.17.8",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "consola": "^2.14.0",
+    "debug": "^4.1.1",
+    "debug-trace": "^2.2.3",
+    "lodash": "^4.17.19",
+    "yargs": "^15.4.1"
+  },
+  "xend": null
+}
